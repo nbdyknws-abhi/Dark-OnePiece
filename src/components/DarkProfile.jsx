@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNarrative } from '../context/NarrativeContext';
 import { NODES, EDGES, JOURNEYS } from '../data/loreData';
 import { FIGURES } from '../data/relationships';
-import { X, ShieldAlert, Award, Compass, Heart, HelpCircle, AlertCircle, Calendar } from 'lucide-react';
+import { Compass, Calendar } from 'lucide-react';
 
 const SCENE_MAP = {
   'marineford': '/assets/scenes/marineford.png',
@@ -76,18 +76,21 @@ export default function DarkProfile() {
     setTransitionCoords
   } = useNarrative();
   
-  const containerRef = useRef(null);
-
-  const lastNodeRef = useRef(null);
-  const lastWaypointIdRef = useRef(null);
+  const [lastNode, setLastNode] = useState(null);
+  const [lastWaypointId, setLastWaypointId] = useState(null);
 
   // Preserve node and waypoint states during exit animation when activeNode becomes null
   if (activeNode) {
-    lastNodeRef.current = NODES.find(n => n.id === activeNode);
-    lastWaypointIdRef.current = activeTimelineWaypointId;
+    const currentNode = NODES.find(n => n.id === activeNode);
+    if (currentNode && (!lastNode || currentNode.id !== lastNode.id)) {
+      setLastNode(currentNode);
+    }
+    if (activeTimelineWaypointId !== lastWaypointId) {
+      setLastWaypointId(activeTimelineWaypointId);
+    }
   }
 
-  const node = lastNodeRef.current;
+  const node = activeNode ? NODES.find(n => n.id === activeNode) : lastNode;
   if (exploreState !== 'exploring' || !node) return null;
 
   // Retrieve relationship metadata if available
@@ -162,7 +165,7 @@ export default function DarkProfile() {
   };
 
   const timeline = getTimeline(node.id);
-  const currentActiveWaypointId = activeNode ? activeTimelineWaypointId : lastWaypointIdRef.current;
+  const currentActiveWaypointId = activeNode ? activeTimelineWaypointId : lastWaypointId;
   const activeIndex = currentActiveWaypointId 
     ? timeline.findIndex(wp => wp.id === currentActiveWaypointId)
     : -1;
@@ -295,7 +298,6 @@ export default function DarkProfile() {
       <AnimatePresence mode="popLayout">
         <motion.div
           key={screenKey}
-          ref={containerRef}
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 2.2, ease: [0.15, 0.85, 0.2, 1] } }}
