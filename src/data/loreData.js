@@ -1,6 +1,6 @@
 export const NODES = [
   // CHARACTERS
-  { id: "luffy", type: "character", name: "Monkey D. Luffy", title: "Emperor of the Sea", description: "The captain of the Straw Hat crew. Inheritor of the Sun God's will.", x: 50, y: 50 },
+  { id: "luffy", type: "character", name: "Monkey D. Luffy", title: "Emperor of the Sea", description: "The captain of the Straw Hat crew. Inheritor of the Sun God's will Nika.", x: 50, y: 50 },
   { id: "robin", type: "character", name: "Nico Robin", title: "Devil Child", description: "The sole survivor of Ohara. The only one capable of reading the Poneglyphs.", x: 45, y: 55 },
   { id: "dragon", type: "character", name: "Monkey D. Dragon", title: "World's Worst Criminal", description: "Leader of the Revolutionary Army. Luffy's father.", x: 35, y: 40 },
   { id: "sakazuki", type: "character", name: "Sakazuki", title: "Fleet Admiral", description: "The iron fist of the World Sovereignty. Believes in Absolute Justice.", x: 60, y: 35 },
@@ -8,6 +8,16 @@ export const NODES = [
   { id: "roger", type: "character", name: "Gol D. Roger", title: "Pirate King", description: "The man who conquered the Grand Line and started the Great Pirate Era.", x: 80, y: 45 },
   { id: "whitebeard", type: "character", name: "Edward Newgate", title: "Whitebeard", description: "The strongest man in the world. Died at Marineford declaring the One Piece is real.", x: 70, y: 40 },
   { id: "kaido", type: "character", name: "Kaido", title: "King of the Beasts", description: "An indestructible tyrant who ruled Wano for two decades.", x: 75, y: 65 },
+  { id: "vegapunk", type: "character", name: "Dr. Vegapunk", title: "Genius Scientist", description: "The world's greatest mind who broadcasted the secret history of the world sinking before his execution.", x: 48, y: 58 },
+  { id: "saturn", type: "character", name: "Saint Jaygarcia Saturn", title: "Warrior God of Science", description: "One of the Five Elders who descended to Egghead to execute Vegapunk and purge the records.", x: 58, y: 22 },
+  { id: "kuma", type: "character", name: "Bartholomew Kuma", title: "The Tyrant / Martyr", description: "The former Revolutionary officer who sacrificed his free will to protect his daughter Bonney and Luffy.", x: 38, y: 48 },
+  { id: "bonney", type: "character", name: "Jewelry Bonney", title: "Gluttonous Worst Gen", description: "Kuma's daughter, capable of transforming into any future, including a Nika-like giant form.", x: 42, y: 52 },
+  { id: "koby", type: "character", name: "Koby", title: "Future of the Marines", description: "The heroic Marine Captain of SWORD captured by Blackbeard and rescued by Garp.", x: 62, y: 28 },
+  { id: "loki", type: "character", name: "Prince Loki", title: "Accursed Giant Prince", description: "The locked giant prince of Elbaph who ate a legendary devil fruit and holds key secrets to the final war.", x: 80, y: 32 },
+  { id: "blackbeard", type: "character", name: "Marshall D. Teach", title: "Blackbeard", description: "The Admiral of the Blackbeard Pirates. The only man holding two Devil Fruits, seeking absolute dominance.", x: 72, y: 48 },
+  { id: "garp", type: "character", name: "Monkey D. Garp", title: "Marine Hero", description: "Luffy's grandfather and legendary Vice Admiral who raided Hachinosu to rescue Koby.", x: 64, y: 25 },
+  { id: "kid", type: "character", name: "Eustass Kid", title: "Magnetic Captain", description: "Worst Generation captain who helped defeat Big Mom, only to be crushed by Shanks at Elbaph.", x: 78, y: 40 },
+  { id: "law", type: "character", name: "Trafalgar Law", title: "Surgeon of Death", description: "Captain of the Heart Pirates who allied with Luffy to defeat Kaido and seeks the truth of the Will of D.", x: 52, y: 44 },
 
   // FACTIONS
   { id: "straw-hats", type: "faction", name: "Straw Hat Fleet", title: "The New Dawn", description: "A massive alliance of pirates sailing under Luffy's flag.", x: 55, y: 50 },
@@ -19,7 +29,9 @@ export const NODES = [
   { id: "ohara", type: "location", name: "Ohara", title: "Tree of Knowledge", description: "An island of scholars who were annihilated for researching the Void Century.", x: 40, y: 65 },
   { id: "marineford", type: "location", name: "Marineford", title: "Naval Fortress", description: "The site of the Summit War, a battle that changed the world forever.", x: 65, y: 35 },
   { id: "wano", type: "location", name: "Wano Country", title: "Land of Samurai", description: "An isolated nation that holds ancient secrets and indestructible stone blocks.", x: 70, y: 60 },
-  { id: "elbaph", type: "location", name: "Elbaph", title: "Warland of Giants", description: "The strongest nation in the world. Home of the proud giant warriors.", x: 85, y: 35 },
+  { id: "egghead", type: "location", name: "Egghead Island", title: "Future Island", description: "The research outpost where ancient history and cybernetic science collided, leading to the Great Sinking announcement.", x: 50, y: 60 },
+  { id: "hachinosu", type: "location", name: "Hachinosu", title: "Pirate Paradise", description: "The base of operations for the Blackbeard Pirates and the site of Garp's clash.", x: 75, y: 45 },
+  { id: "elbaph", type: "location", name: "Elbaph", title: "Warland of Giants", description: "The strongest nation in the world. Home of the proud giant warriors. Current landing site of the Straw Hats.", x: 85, y: 35 },
   { id: "laughtale", type: "location", name: "Laugh Tale", title: "The Final Island", description: "The legendary island containing the true history of the world and the One Piece.", x: 90, y: 50 },
 
   // ARCS & CONCEPTS
@@ -59,6 +71,49 @@ export const EDGES = [
   { source: "whitebeard", target: "summit-war", label: "Instigator", type: "event" },
   { source: "sakazuki", target: "summit-war", label: "Executioner", type: "event" },
   { source: "luffy", target: "summit-war", label: "Invader", type: "event" },
+
+  // --- EGGHEAD & ELBAPH ADDITIONS ---
+  { source: "luffy", target: "egghead", label: "Siege of Egghead", type: "event" },
+  { source: "luffy", target: "vegapunk", label: "Protector", type: "alliance" },
+  { source: "luffy", target: "elbaph", label: "Elbaph Landing", type: "event" },
+  { source: "luffy", target: "loki", label: "Encounter in Chains", type: "rivalry" },
+
+  { source: "vegapunk", target: "egghead", label: "Laboratory Outpost", type: "origin" },
+  { source: "vegapunk", target: "void-century", label: "Deciphered History", type: "alliance" },
+  { source: "vegapunk", target: "world-gov", label: "Assassination Target", type: "rivalry" },
+
+  { source: "saturn", target: "world-gov", label: "Five Elders Member", type: "subordinate" },
+  { source: "saturn", target: "vegapunk", label: "Executioner", type: "rivalry" },
+  { source: "saturn", target: "egghead", label: "Buster Call Summon", type: "event" },
+  { source: "saturn", target: "luffy", label: "Ancient Enemy Nika", type: "rivalry" },
+
+  { source: "kuma", target: "bonney", label: "Father & Daughter", type: "origin" },
+  { source: "kuma", target: "vegapunk", label: "Pacifista Sacrifice", type: "alliance" },
+  { source: "kuma", target: "dragon", label: "Revolutionary Officer", type: "alliance" },
+  { source: "bonney", target: "luffy", label: "Nika Disciple", type: "alliance" },
+  { source: "bonney", target: "vegapunk", label: "Egghead Allies", type: "alliance" },
+
+  { source: "blackbeard", target: "hachinosu", label: "Admiral Base", type: "origin" },
+  { source: "blackbeard", target: "luffy", label: "Clash of Destiny", type: "rivalry" },
+  { source: "blackbeard", target: "shanks", label: "Bitter Enemies", type: "rivalry" },
+  { source: "blackbeard", target: "koby", label: "Hostage Captor", type: "rivalry" },
+
+  { source: "garp", target: "koby", label: "Mentor & Disciple", type: "alliance" },
+  { source: "garp", target: "marines", label: "Navy Legend", type: "alliance" },
+  { source: "garp", target: "luffy", label: "Grandfather", type: "origin" },
+  { source: "garp", target: "dragon", label: "Father", type: "origin" },
+  { source: "garp", target: "blackbeard", label: "Hachinosu Raid", type: "rivalry" },
+  { source: "koby", target: "marines", label: "SWORD Officer", type: "alliance" },
+
+  { source: "shanks", target: "elbaph", label: "Protector of Warland", type: "alliance" },
+  { source: "shanks", target: "kid", label: "Divine Departure Clash", type: "rivalry" },
+  { source: "kid", target: "elbaph", label: "Defeated at Shores", type: "event" },
+  { source: "kid", target: "luffy", label: "Worst Gen Competitor", type: "rivalry" },
+  { source: "loki", target: "elbaph", label: "Giant Prince", type: "origin" },
+  { source: "luffy", target: "law", label: "Wano Alliance", type: "alliance" },
+  { source: "law", target: "wano", label: "Throne Slayers", type: "event" },
+  { source: "blackbeard", target: "law", label: "Winner Island Clash", type: "rivalry" },
+  { source: "law", target: "poneglyphs", label: "Will of D. Seeker", type: "alliance" },
 ];
 
 export const JOURNEYS = {
@@ -88,7 +143,7 @@ export const JOURNEYS = {
         chapter: "Chapter II: The Desert Kingdom",
         tagline: "Sand and Warlords",
         x: 160, y: 190,
-        weather: "fog", // dusty fog
+        weather: "fog",
         sound: "Winds carrying sand dust",
         stakes: "Saving Princess Vivi's kingdom from the shadow of Warlord Crocodile and Baroque Works.",
         factions: ["Straw Hat Fleet", "World Sovereignty"],
@@ -151,6 +206,20 @@ export const JOURNEYS = {
         characters: ["Monkey D. Luffy", "Nico Robin", "Sakazuki"],
         lore: "A futuristic island housing technologies from the ancient Void Century, now besieged by the World Government.",
         symbol: "🌐"
+      },
+      {
+        id: "elbaph",
+        name: "Elbaph Shores",
+        chapter: "Chapter VII: Land of Giants",
+        tagline: "Unveiling the Dawn",
+        x: 480, y: 130,
+        weather: "east-blue",
+        sound: "Horn of war and crashing tides",
+        stakes: "Landing at the mythical nation of Elbaph, encountering the chained giant prince Loki, and prepping for the final war.",
+        factions: ["Straw Hat Fleet"],
+        characters: ["Monkey D. Luffy", "Shanks", "Prince Loki"],
+        lore: "The majestic Warland of Elbaph, home of giants who hold the saved Ohara books and coordinate with the Straw Hats.",
+        symbol: "🏰"
       }
     ]
   },
@@ -208,7 +277,7 @@ export const JOURNEYS = {
         chapter: "Chapter IV: Light of Revolution",
         tagline: "The White Sands",
         x: 300, y: 240,
-        weather: "east-blue", // warm winds
+        weather: "east-blue",
         sound: "Howling desert winds and flags flapping",
         stakes: "Finding temporary safety and purpose with Luffy's father, Dragon, and the Revolutionary Army.",
         factions: ["Revolutionary Army"],
@@ -229,6 +298,20 @@ export const JOURNEYS = {
         characters: ["Nico Robin", "Monkey D. Luffy"],
         lore: "Vegapunk salvaged Ohara's research from the lake of fire, proving that the scholars' will could never be erased.",
         symbol: "📖"
+      },
+      {
+        id: "elbaph",
+        name: "Elbaph",
+        chapter: "Chapter VI: Rejoining Saul",
+        tagline: "Scholars Reunite",
+        x: 480, y: 130,
+        weather: "east-blue",
+        sound: "Giant footsteps and paper rustling",
+        stakes: "Journeying to Elbaph where the books of Ohara are preserved by Saul. Unlocking the final Road Poneglyph.",
+        factions: ["Straw Hat Fleet"],
+        characters: ["Nico Robin", "Loki"],
+        lore: "Elbaph serves as the final repository of Ohara's legacy, where Robin is reunited with the history her people died to save.",
+        symbol: "📚"
       }
     ]
   },
@@ -293,8 +376,255 @@ export const JOURNEYS = {
         characters: ["Trafalgar Law", "Monkey D. Luffy", "Kaido"],
         lore: "By slaying an Emperor, Law proved that the old generation's control was officially broken, uncovering clues to the 'Will of D.'",
         symbol: "🌀"
+      },
+      {
+        id: "winner-island",
+        name: "Winner Island",
+        chapter: "Chapter V: Ambush in the Mist",
+        tagline: "The Surgeon Defeated",
+        x: 420, y: 260,
+        weather: "fog",
+        sound: "Dark laughter and crashing ships",
+        stakes: "Ambushed by Blackbeard Pirates. Facing Teach in a deathmatch, having his crew destroyed, and barely escaping via Bepo.",
+        factions: ["World Sovereignty"],
+        characters: ["Trafalgar Law", "Marshall D. Teach"],
+        lore: "Winner Island shores, where the Heart Pirates met their match against Blackbeard's quake and gravity powers.",
+        symbol: "💔"
+      }
+    ]
+  },
+  shanks: {
+    characterId: "shanks",
+    name: "Red-Haired Shanks",
+    title: "Voyage of the Guardian",
+    description: "The path of Roger's successor, sailing the oceans to maintain equilibrium and test the next generation.",
+    waypoints: [
+      {
+        id: "loguetown",
+        name: "Loguetown",
+        chapter: "Chapter I: The Execution",
+        tagline: "The King's Tears",
+        x: 80, y: 150,
+        weather: "cold-rain",
+        sound: "Thunder cracks and pouring rain",
+        stakes: "Witnessing Gol D. Roger's execution, weeping for his captain, and promising to build his own crew.",
+        factions: ["World Sovereignty"],
+        characters: ["Shanks", "Gol D. Roger"],
+        lore: "The Town of the Beginning and the End where the Roger Pirates dispersed, and the Great Pirate Era officially began.",
+        symbol: "⚔️"
+      },
+      {
+        id: "foosha",
+        name: "Foosha Village",
+        chapter: "Chapter II: Passing the Crown",
+        tagline: "A New Generation",
+        x: 130, y: 160,
+        weather: "east-blue",
+        sound: "Gentle tide and pub music",
+        stakes: "Losing his left arm to a Sea King to protect young Luffy, and giving him his prized straw hat.",
+        factions: ["Straw Hat Fleet"],
+        characters: ["Shanks", "Monkey D. Luffy"],
+        lore: "A quiet port town where Shanks saw the spark of Roger in Luffy, placing a bet on the new era.",
+        symbol: "👒"
+      },
+      {
+        id: "marineford",
+        name: "Marineford",
+        chapter: "Chapter III: Stopping the War",
+        tagline: "Challenging All Sides",
+        x: 270, y: 150,
+        weather: "ash",
+        sound: "Sudden silence over battlefield",
+        stakes: "Arriving at Marineford to end the war, defying the Navy and challenging Blackbeard's fleet.",
+        factions: ["Marine Headquarters", "World Sovereignty"],
+        characters: ["Shanks", "Sakazuki", "Marshall D. Teach"],
+        lore: "Shanks stood in the center of the naval fortress, claiming Ace and Whitebeard's bodies for an honorable burial.",
+        symbol: "🛡️"
+      },
+      {
+        id: "wano-coast",
+        name: "Wano Coast",
+        chapter: "Chapter IV: Conquering Haki",
+        tagline: "The Emperor's Warning",
+        x: 350, y: 220,
+        weather: "ink",
+        sound: "Crackling red lightning static",
+        stakes: "Unleashing massive Conqueror's Haki from miles away to deter Admiral Ryokugyu from attacking the resting Straw Hats.",
+        factions: ["Marine Headquarters"],
+        characters: ["Shanks"],
+        lore: "The seas outside Wano where Shanks guarded the resting alliance from Admiral Ryokugyu's ambush.",
+        symbol: "⚡"
+      },
+      {
+        id: "elbaph",
+        name: "Elbaph Shores",
+        chapter: "Chapter V: Divine Departure",
+        tagline: "Obliterating the Kid Pirates",
+        x: 480, y: 130,
+        weather: "east-blue",
+        sound: "Crashing swords and massive explosions",
+        stakes: "Protecting his giant allies from Eustass Kid's electromagnetic cannon by executing his signature 'Divine Departure'.",
+        factions: ["Emperors"],
+        characters: ["Shanks", "Eustass Kid"],
+        lore: "Elbaph's shores, where Shanks instantly destroyed Kid's crew, claiming their Road Poneglyph rubbings.",
+        symbol: "💥"
+      }
+    ]
+  },
+  blackbeard: {
+    characterId: "blackbeard",
+    name: "Marshall D. Teach",
+    title: "Voyage of the Dark Era",
+    description: "The dark ascent of Blackbeard, climbing from a nameless crewman to the lord of darkness.",
+    waypoints: [
+      {
+        id: "moby-dick",
+        name: "Moby Dick",
+        chapter: "Chapter I: The Silent Betrayal",
+        tagline: "Fleeing the Whitebeard Fleet",
+        x: 100, y: 100,
+        weather: "calm",
+        sound: "Squeaking wooden deck and dark whisper",
+        stakes: "Murdering commander Thatch to steal the Yami Yami no Mi after hiding on the ship for decades.",
+        factions: ["Emperors"],
+        characters: ["Marshall D. Teach", "Whitebeard"],
+        lore: "The flagship Moby Dick, where Teach broke the absolute rule of Whitebeard's ship: do not kill your brother.",
+        symbol: "🍎"
+      },
+      {
+        id: "banaro",
+        name: "Banaro Island",
+        chapter: "Chapter II: Clash of Fire & Dark",
+        tagline: "Capturing Portgas D. Ace",
+        x: 180, y: 160,
+        weather: "fog",
+        sound: "Burning fire and gravity hums",
+        stakes: "Defeating Fire Fist Ace in a duel, delivering him to the World Government to secure a Warlord position.",
+        factions: ["World Sovereignty"],
+        characters: ["Marshall D. Teach"],
+        lore: "The ruined town of Banaro, scorched by Ace's flame and swallowed by Teach's black hole gravity.",
+        symbol: "🌑"
+      },
+      {
+        id: "impel-down",
+        name: "Impel Down",
+        chapter: "Chapter III: Level 6 Incursion",
+        tagline: "Building the Titanic Fleet",
+        x: 230, y: 180,
+        weather: "cold-rain",
+        sound: "Clinking chains and screams in darkness",
+        stakes: "Infiltrating the underwater prison during Luffy's chaos, recruiting the most monstrous criminals in history.",
+        factions: ["World Sovereignty", "Marine Headquarters"],
+        characters: ["Marshall D. Teach"],
+        lore: "The iron prison where Teach assembled his Ten Titanic Captains by forcing inmates to fight to the death.",
+        symbol: "🗝️"
+      },
+      {
+        id: "marineford",
+        name: "Marineford",
+        chapter: "Chapter IV: Dual Power Awakening",
+        tagline: "The Tremor Fruit Theft",
+        x: 270, y: 150,
+        weather: "ash",
+        sound: "Crying laughter and earthquake rumbling",
+        stakes: "Executing the weakened Whitebeard, cover-shrouding his body, and stealing the Gura Gura no Mi power.",
+        factions: ["Marine Headquarters"],
+        characters: ["Marshall D. Teach", "Whitebeard", "Sakazuki"],
+        lore: "Teach shook the fortress by declaring that his era of dark earthquakes has officially begun.",
+        symbol: "🌋"
+      },
+      {
+        id: "hachinosu",
+        name: "Hachinosu Island",
+        chapter: "Chapter V: Hero's Fall",
+        tagline: "Defeating Vice Admiral Garp",
+        x: 440, y: 220,
+        weather: "storm",
+        sound: "Garp's final punch and island shifting",
+        stakes: "Defending his pirate base from Garp's SWORD strike team, capturing Koby, and freezing Garp in ice.",
+        factions: ["Emperors"],
+        characters: ["Marshall D. Teach", "Monkey D. Garp", "Koby"],
+        lore: "The Pirate Island where Garp fought the Blackbeard captains to ensure Koby's escape, falling in battle.",
+        symbol: "💀"
+      }
+    ]
+  },
+  koby: {
+    characterId: "koby",
+    name: "Koby",
+    title: "Voyage of reformed Justice",
+    description: "The meteoric rise of Koby from a weak coward to the legendary protector and fist of SWORD.",
+    waypoints: [
+      {
+        id: "east-blue",
+        name: "Alvida's Ship",
+        chapter: "Chapter I: Rescued from Shame",
+        tagline: "The Cowardly Cabin Boy",
+        x: 70, y: 220,
+        weather: "east-blue",
+        sound: "Wood creaks and pirate shouts",
+        stakes: "Escaping Alvida's crew with Luffy's help, declaring his dream to become an elite Marine Admiral.",
+        factions: ["Straw Hat Fleet"],
+        characters: ["Koby", "Monkey D. Luffy"],
+        lore: "A crude pirate boat where Koby met Luffy, learning that achieving one's dream is worth dying for.",
+        symbol: "⛵"
+      },
+      {
+        id: "marineford",
+        name: "Marineford War",
+        chapter: "Chapter II: Cry of Reason",
+        tagline: "A Few Seconds of Courage",
+        x: 270, y: 150,
+        weather: "ash",
+        sound: "Crying plea and heavy cannon fire",
+        stakes: "Awakening Observation Haki during the war, standing in front of Akainu to halt the massacre.",
+        factions: ["Marine Headquarters", "World Sovereignty"],
+        characters: ["Koby", "Sakazuki", "Shanks"],
+        lore: "Koby risked his life to stop the slaughter of wounded soldiers, saved by the arrival of Red-Haired Shanks.",
+        symbol: "📣"
+      },
+      {
+        id: "rocky-port",
+        name: "Rocky Port",
+        chapter: "Chapter III: Rocky Port Legend",
+        tagline: "The Hero Moniker",
+        x: 320, y: 180,
+        weather: "fog",
+        sound: "Siren horns and military drills",
+        stakes: "Protecting hundreds of innocent citizens during Law's complex heist, forming a temporary pact with Blackbeard.",
+        factions: ["Marine Headquarters"],
+        characters: ["Koby", "Trafalgar Law"],
+        lore: "The incident that earned Koby the nickname 'The Hero of Rocky Port' and solidified his standing in SWORD.",
+        symbol: "🏅"
+      },
+      {
+        id: "hachinosu",
+        name: "Hachinosu",
+        chapter: "Chapter IV: Captive of the Dark",
+        tagline: "Hostage of the Emperors",
+        x: 440, y: 220,
+        weather: "storm",
+        sound: "Heavy iron chains and pirate taunts",
+        stakes: "Surrendering himself to Blackbeard to protect the marine hostages, imprisoned in the deep dungeons.",
+        factions: ["Emperors"],
+        characters: ["Koby", "Monkey D. Garp"],
+        lore: "Hachinosu island where Koby was held as political leverage by Blackbeard to force WG recognition.",
+        symbol: "⛓️"
+      },
+      {
+        id: "hachinosu-escape",
+        name: "Hachinosu Plaza",
+        chapter: "Chapter V: Honesty Impact",
+        tagline: "Shattering the Giant Hand",
+        x: 460, y: 210,
+        weather: "storm",
+        sound: "Massive haki impact blast",
+        stakes: "Unleashing advanced armament Haki to obliterate Avalo Pizarro's island-sized hand, saving the escaping SWORD ship.",
+        factions: ["Marine Headquarters"],
+        characters: ["Koby", "Monkey D. Garp"],
+        lore: "Koby unleashed a massive shockwave punch, proving himself as Garp's true successor while Garp stayed behind.",
+        symbol: "✊"
       }
     ]
   }
 };
-

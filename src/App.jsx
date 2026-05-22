@@ -4,7 +4,7 @@ import LandingOverlay from './components/LandingOverlay';
 import UniverseGraph from './components/UniverseGraph';
 import NodeDossier from './components/NodeDossier';
 import CinematicJourney from './components/CinematicJourney';
-import ForbiddenCodex from './components/ForbiddenCodex';
+import Forbidden from './components/Forbidden';
 
 function AppContent() {
   const { 
@@ -33,7 +33,7 @@ function AppContent() {
         <div className="absolute top-6 left-6 right-6 z-30 flex flex-col md:flex-row items-center justify-between p-4 md:px-6 rounded bg-[#090b0e]/75 backdrop-blur-xl border border-gold/15 shadow-[0_0_20px_rgba(0,0,0,0.8)] animate-fade-in">
           {/* Brand/Indicator */}
           <div className="flex items-center space-x-3 mb-4 md:mb-0">
-            <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-gold" />
             <div className="flex flex-col">
               <span className="text-[11px] font-serif font-black tracking-widest text-parchment uppercase">
                 THE GRAND ERA
@@ -63,7 +63,7 @@ function AppContent() {
               <span className="text-[8px] font-mono text-fog/40 tracking-wider uppercase mr-1">
                 Voyage Paths:
               </span>
-              {['luffy', 'robin', 'law'].map((vKey) => (
+              {['luffy', 'robin', 'law', 'shanks', 'blackbeard', 'koby'].map((vKey) => (
                 <button
                   key={vKey}
                   onClick={() => startJourney(vKey)}
@@ -74,13 +74,13 @@ function AppContent() {
               ))}
             </div>
 
-            {/* Open Forbidden Codex */}
+            {/* Open Forbidden */}
             <button
               onClick={() => setIsCodexOpen(true)}
               className="px-4 py-1.5 rounded border border-crimson/50 hover:border-crimson bg-crimson/10 hover:bg-crimson/25 text-crimson-light hover:text-white text-[9px] font-mono tracking-widest uppercase transition-all flex items-center space-x-1.5 cursor-pointer"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-crimson animate-ping" />
-              <span>Forbidden Codex</span>
+              <span>Forbidden</span>
             </button>
           </div>
         </div>
@@ -95,8 +95,8 @@ function AppContent() {
         </>
       )}
 
-      {/* 4. Fullscreen Forbidden Codex Overlay */}
-      <ForbiddenCodex />
+      {/* 4. Fullscreen Forbidden Overlay */}
+      <Forbidden />
     </div>
   );
 }

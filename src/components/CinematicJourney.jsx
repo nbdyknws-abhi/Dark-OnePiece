@@ -4,6 +4,59 @@ import { Compass, ArrowLeft, ArrowRight, X, Volume2, Anchor } from 'lucide-react
 import { useNarrative } from '../context/NarrativeContext';
 import { JOURNEYS } from '../data/loreData';
 
+const SCENE_MAP = {
+  // Core scene locations
+  'marineford': '/assets/scenes/marineford.png',
+  'east-blue': '/assets/scenes/landing_bg.png',
+  'wano': '/assets/scenes/wano.png',
+  'onigashima': '/assets/scenes/wano.png',
+  'enies-lobby': '/assets/scenes/enies-lobby.png',
+  'sabaody': '/assets/scenes/landing_bg.png',
+  'impel-down': '/assets/scenes/marineford.png',
+  'dressrosa': '/assets/scenes/enies-lobby.png',
+  'whole-cake': '/assets/scenes/landing_bg.png',
+  'egghead': '/assets/scenes/egghead.png',
+  'elbaph': '/assets/scenes/elbaph.png',
+  'ohara': '/assets/scenes/ohara.png',
+  'hachinosu': '/assets/scenes/hachinosu.png',
+  'hachinosu-escape': '/assets/scenes/hachinosu.png',
+  'laughtale': '/assets/scenes/laughtale.png',
+
+  // Voyage-specific additional waypoints mapping to high-quality fallbacks
+  'alabasta': '/assets/scenes/wano.png',
+  'baltigo': '/assets/scenes/landing_bg.png',
+  'flevance': '/assets/scenes/ohara.png',
+  'corazon': '/assets/scenes/ohara.png',
+  'winner-island': '/assets/scenes/hachinosu.png',
+  'loguetown': '/assets/scenes/landing_bg.png',
+  'foosha': '/assets/scenes/landing_bg.png',
+  'wano-coast': '/assets/scenes/wano.png',
+  'moby-dick': '/assets/scenes/landing_bg.png',
+  'banaro': '/assets/scenes/marineford.png',
+  'rocky-port': '/assets/scenes/marineford.png',
+};
+
+const PORTRAIT_MAP = {
+  'luffy': '/assets/portraits/luffy.png',
+  'robin': '/assets/portraits/robin.png',
+  'dragon': '/assets/portraits/dragon.png',
+  'sakazuki': '/assets/portraits/sakazuki.png',
+  'shanks': '/assets/portraits/shanks.png',
+  'roger': '/assets/portraits/roger.png',
+  'whitebeard': '/assets/portraits/whitebeard.png',
+  'kaido': '/assets/portraits/kaido.png',
+  'vegapunk': '/assets/portraits/vegapunk.png',
+  'saturn': '/assets/portraits/saturn.png',
+  'kuma': '/assets/portraits/kuma.png',
+  'bonney': '/assets/portraits/bonney.png',
+  'koby': '/assets/portraits/koby.png',
+  'loki': '/assets/portraits/loki.png',
+  'blackbeard': '/assets/portraits/blackbeard.png',
+  'garp': '/assets/portraits/garp.png',
+  'kid': '/assets/portraits/kid.png',
+  'law': '/assets/portraits/law.png',
+};
+
 export default function CinematicJourney() {
   const {
     activeJourney,
@@ -24,17 +77,31 @@ export default function CinematicJourney() {
     if (lower.includes('sakazuki')) return 'sakazuki';
     if (lower.includes('shanks')) return 'shanks';
     if (lower.includes('roger')) return 'roger';
-    if (lower.includes('whitebeard')) return 'whitebeard';
+    if (lower.includes('whitebeard') || lower.includes('newgate')) return 'whitebeard';
     if (lower.includes('kaido')) return 'kaido';
+    if (lower.includes('vegapunk')) return 'vegapunk';
+    if (lower.includes('saturn')) return 'saturn';
+    if (lower.includes('kuma')) return 'kuma';
+    if (lower.includes('bonney')) return 'bonney';
+    if (lower.includes('koby')) return 'koby';
+    if (lower.includes('loki')) return 'loki';
+    if (lower.includes('blackbeard') || lower.includes('teach')) return 'blackbeard';
+    if (lower.includes('garp')) return 'garp';
+    if (lower.includes('kid')) return 'kid';
+
     if (lower.includes('straw hat')) return 'straw-hats';
     if (lower.includes('revolution')) return 'revolutionaries';
     if (lower.includes('marine')) return 'marines';
-    if (lower.includes('sovereign')) return 'world-gov';
+    if (lower.includes('sovereign') || lower.includes('world-gov') || lower.includes('elders')) return 'world-gov';
+
     if (lower.includes('ohara')) return 'ohara';
     if (lower.includes('marineford')) return 'marineford';
     if (lower.includes('wano')) return 'wano';
+    if (lower.includes('egghead')) return 'egghead';
+    if (lower.includes('hachinosu')) return 'hachinosu';
     if (lower.includes('elbaph')) return 'elbaph';
     if (lower.includes('laughtale') || lower.includes('laugh tale')) return 'laughtale';
+
     if (lower.includes('void century')) return 'void-century';
     if (lower.includes('poneglyph')) return 'poneglyphs';
     if (lower.includes('summit war') || lower.includes('summit-war')) return 'summit-war';
@@ -361,7 +428,21 @@ export default function CinematicJourney() {
             onClick={dismissIntro}
             className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/90 cursor-pointer"
           >
-            <div className="text-center max-w-3xl px-6 space-y-6">
+            {/* Atmospheric scene background */}
+            {SCENE_MAP[currentWaypoint.id] && (
+              <motion.img
+                key={currentWaypoint.id}
+                src={SCENE_MAP[currentWaypoint.id]}
+                alt=""
+                initial={{ scale: 1, opacity: 0 }}
+                animate={{ scale: 1.15, opacity: 0.18 }}
+                transition={{ scale: { duration: 10, ease: "linear" }, opacity: { duration: 2, ease: "easeIn" } }}
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              />
+            )}
+            {/* Dark overlay to keep text readable */}
+            <div className="absolute inset-0 bg-black/70 pointer-events-none" />
+            <div className="relative z-10 text-center max-w-3xl px-6 space-y-6">
               <motion.span
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 0.4, y: 0 }}
@@ -429,13 +510,22 @@ export default function CinematicJourney() {
               </span>
             </div>
 
-            <div>
-              <h3 className="font-serif text-2xl font-bold text-parchment uppercase leading-none">
-                {currentWaypoint.name}
-              </h3>
-              <p className="text-[10px] font-mono text-gold-dark tracking-widest uppercase mt-1">
-                {currentWaypoint.tagline}
-              </p>
+            <div className="flex items-center gap-3">
+              {PORTRAIT_MAP[journey.characterId] && (
+                <img
+                  src={PORTRAIT_MAP[journey.characterId]}
+                  alt={journey.name}
+                  className="w-9 h-9 rounded-full object-cover border border-gold/30 flex-shrink-0"
+                />
+              )}
+              <div>
+                <h3 className="font-serif text-2xl font-bold text-parchment uppercase leading-none">
+                  {currentWaypoint.name}
+                </h3>
+                <p className="text-[10px] font-mono text-gold-dark tracking-widest uppercase mt-1">
+                  {currentWaypoint.tagline}
+                </p>
+              </div>
             </div>
 
             <p className="text-xs font-light text-fog/90 leading-relaxed max-w-3xl">

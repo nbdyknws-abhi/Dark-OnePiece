@@ -23,20 +23,25 @@ export function NarrativeProvider({ children }) {
   };
 
   const selectNode = (nodeId) => {
-    if (activeNode === nodeId) return;
+    if (nodeId === null) {
+      setActiveNode(null);
+      setNodeHistory([]);
+      setWeatherEffect('calm');
+      return;
+    }
+    if (activeNode === nodeId) {
+      setActiveNode(null);
+      setNodeHistory([]);
+      setWeatherEffect('calm');
+      return;
+    }
     if (activeNode) {
       setNodeHistory((prev) => [...prev, activeNode]);
     }
     setActiveNode(nodeId);
     
-    // Simulate some cinematic weather changes depending on node type
-    if (nodeId === 'elbaph' || nodeId === 'wano') {
-      setWeatherEffect('storm');
-    } else if (nodeId === 'sakazuki' || nodeId === 'marineford') {
-      setWeatherEffect('embers');
-    } else {
-      setWeatherEffect('calm');
-    }
+    // Assign the custom node ID as the weather effect directly
+    setWeatherEffect(nodeId);
   };
 
   const goBack = () => {
@@ -44,8 +49,10 @@ export function NarrativeProvider({ children }) {
       const prevNode = nodeHistory[nodeHistory.length - 1];
       setNodeHistory((prev) => prev.slice(0, -1));
       setActiveNode(prevNode);
+      setWeatherEffect(prevNode);
     } else {
       setActiveNode(null);
+      setWeatherEffect('calm');
     }
   };
 

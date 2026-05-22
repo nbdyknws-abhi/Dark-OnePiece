@@ -8,11 +8,32 @@ export default function LandingOverlay() {
     <AnimatePresence>
       {exploreState === 'landing' && (
         <motion.div 
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 2, ease: "easeInOut" }}
         >
+          {/* Cinematic background image with slow zoom */}
+          <motion.div
+            className="absolute inset-0 overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 3, ease: "easeOut" }}
+          >
+            <motion.img
+              src="/assets/scenes/landing_bg.png"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ scale: 1.0 }}
+              animate={{ scale: 1.1 }}
+              transition={{ duration: 30, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+            />
+          </motion.div>
+
+          {/* Dark gradient overlay for text readability */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black via-black/70 to-black/50" />
+
+          {/* Radial vignette */}
           <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,#000000_100%)] opacity-80" />
           
           <div className="relative z-10 text-center flex flex-col items-center max-w-3xl px-6">

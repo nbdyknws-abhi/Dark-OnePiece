@@ -3,6 +3,39 @@ import { ChevronLeft, GitCommit, MapPin, Shield, BookOpen } from 'lucide-react';
 import { useNarrative } from '../context/NarrativeContext';
 import { NODES, EDGES, JOURNEYS } from '../data/loreData';
 
+const PORTRAIT_MAP = {
+  // Characters
+  luffy: '/assets/portraits/luffy.png',
+  robin: '/assets/portraits/robin.png',
+  dragon: '/assets/portraits/dragon.png',
+  sakazuki: '/assets/portraits/sakazuki.png',
+  shanks: '/assets/portraits/shanks.png',
+  roger: '/assets/portraits/roger.png',
+  whitebeard: '/assets/portraits/whitebeard.png',
+  kaido: '/assets/portraits/kaido.png',
+  vegapunk: '/assets/portraits/vegapunk.png',
+  saturn: '/assets/portraits/saturn.png',
+  kuma: '/assets/portraits/kuma.png',
+  bonney: '/assets/portraits/bonney.png',
+  koby: '/assets/portraits/koby.png',
+  loki: '/assets/portraits/loki.png',
+  blackbeard: '/assets/portraits/blackbeard.png',
+  garp: '/assets/portraits/garp.png',
+  kid: '/assets/portraits/kid.png',
+  law: '/assets/portraits/law.png',
+
+  // Locations / Concepts / Arcs
+  ohara: '/assets/scenes/ohara.png',
+  marineford: '/assets/scenes/marineford.png',
+  wano: '/assets/scenes/wano.png',
+  egghead: '/assets/scenes/egghead.png',
+  hachinosu: '/assets/scenes/hachinosu.png',
+  elbaph: '/assets/scenes/elbaph.png',
+  laughtale: '/assets/scenes/laughtale.png',
+  'summit-war': '/assets/scenes/marineford.png',
+  'enies-lobby': '/assets/scenes/enies-lobby.png',
+};
+
 export default function NodeDossier() {
   const { activeNode, goBack, exploreState, startJourney } = useNarrative();
 
@@ -47,7 +80,31 @@ export default function NodeDossier() {
 
           {/* Dossier Content - Scrollable */}
           <div className="flex-1 overflow-y-auto p-8 space-y-10">
-            
+
+            {/* Portrait / Scene Image */}
+            {PORTRAIT_MAP[node.id] && (
+              <motion.div
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                className={`relative w-full rounded overflow-hidden mb-6 ${
+                  node.type === 'character' ? 'aspect-[4/3] md:aspect-[4/3]' : 'h-48 md:h-56'
+                }`}
+              >
+                <img
+                  src={PORTRAIT_MAP[node.id]}
+                  alt={node.name}
+                  className={`object-cover w-full h-full ${
+                    node.type === 'character' ? 'object-[center_15%]' : 'object-center'
+                  }`}
+                />
+                {/* Cinematic gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                {/* Golden border bottom glow */}
+                <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+              </motion.div>
+            )}
+
             {/* Title Block */}
             <div>
               <div className="flex items-center space-x-3 mb-3">
@@ -101,13 +158,22 @@ export default function NodeDossier() {
               {connectedNodes.length > 0 ? (
                 <div className="space-y-4">
                   {connectedNodes.map((conn, idx) => (
-                    <div key={idx} className="flex flex-col border-l border-gold/20 pl-4 py-1">
+                    <div key={idx} className="flex items-start border-l border-gold/20 pl-4 py-1">
+                      {PORTRAIT_MAP[conn.node.id] && (
+                        <img
+                          src={PORTRAIT_MAP[conn.node.id]}
+                          alt={conn.node.name}
+                          className="w-6 h-6 rounded-full object-cover border border-gold/30 mr-3 mt-0.5 flex-shrink-0"
+                        />
+                      )}
+                      <div className="flex flex-col">
                       <span className="text-xs font-serif text-parchment font-bold">
                         {conn.node.name}
                       </span>
                       <span className="text-[10px] font-mono text-fog/50 uppercase mt-1">
                         Relation: {conn.label}
                       </span>
+                      </div>
                     </div>
                   ))}
                 </div>

@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { useNarrative } from '../context/NarrativeContext';
 
-// 1. Redacted Text Block with Character Decryption Animation
+// Redacted Text Block with Character Decryption Animation
 function RedactedBlock({ text }) {
   const [revealed, setRevealed] = useState(false);
   const [displayText, setDisplayText] = useState(() => '█'.repeat(text.length || 10));
@@ -57,7 +57,7 @@ function RedactedBlock({ text }) {
   );
 }
 
-export default function ForbiddenCodex() {
+export default function Forbidden() {
   const { isCodexOpen, setIsCodexOpen, activeCodexTab, setActiveCodexTab } = useNarrative();
 
   // State for Classified Files Tab
@@ -115,6 +115,16 @@ export default function ForbiddenCodex() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className="fixed inset-0 z-50 bg-[#060709]/95 backdrop-blur-2xl flex flex-col font-sans text-parchment"
       >
+        {/* Atmospheric background image */}
+        <div className="absolute inset-0 pointer-events-none">
+          <img 
+            src="/assets/scenes/marineford.png" 
+            alt="" 
+            className="w-full h-full object-cover opacity-[0.04]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#060709] via-transparent to-[#060709]" />
+        </div>
+
         {/* Cinematic Grid scanlines background */}
         <div className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-5 bg-[linear-gradient(rgba(18,24,38,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] [background-size:100%_4px,3px_100%]" />
         
@@ -194,9 +204,15 @@ export default function ForbiddenCodex() {
                 </h3>
                 
                 {[
-                  { id: 'wg-0089', title: 'Ohara Annihilation report', code: 'WG-0089', level: 'LEVEL V CLEARANCE' },
-                  { id: 'wg-0104', title: 'God Valley suppression', code: 'WG-0104', level: 'FORBIDDEN LEVEL' },
+                  { id: 'wg-0089', title: 'Ohara Annihilation Report', code: 'WG-0089', level: 'LEVEL V CLEARANCE' },
+                  { id: 'wg-0104', title: 'God Valley Suppression', code: 'WG-0104', level: 'FORBIDDEN LEVEL' },
+                  { id: 'wg-0222', title: 'Lulusia Eradication & Uranus', code: 'WG-0222', level: 'IMPERIAL EXTREME' },
+                  { id: 'wg-0500', title: 'Noah Apology Translation', code: 'WG-0500', level: 'LEVEL V CLEARANCE' },
                   { id: 'wg-0722', title: 'Great Sinking Prophecy', code: 'WG-0722', level: 'EXTREME WARNING' },
+                  { id: 'wg-0815', title: 'Egghead & Iron Giant', code: 'WG-0815', level: 'EXTREME DANGER' },
+                  { id: 'wg-0900', title: 'Gorosei Forms & Joy Boy', code: 'WG-0900', level: 'FORBIDDEN LEVEL' },
+                  { id: 'wg-0999', title: 'The Empty Throne & Imu', code: 'WG-0999', level: 'IMPERIAL EXTREME' },
+                  { id: 'wg-1111', title: 'The Clan of D. & Storm', code: 'WG-1111', level: 'FORBIDDEN LEVEL' },
                 ].map(file => (
                   <button
                     key={file.id}
@@ -309,6 +325,68 @@ export default function ForbiddenCodex() {
                     </div>
                   )}
 
+                  {selectedFileId === 'wg-0222' && (
+                    <div className="space-y-6">
+                      <div className="space-y-2 pb-4 border-b border-white/5 font-mono text-[10px] text-fog/40">
+                        <div>RECORD INDEX: WG-0222</div>
+                        <div>OPERATIVE REF: IMU.MARIEJOIS</div>
+                        <div>SUBJECT: TACTICAL WEAPON TESTING & LULUSIA ERASURE</div>
+                      </div>
+
+                      <h2 className="text-2xl font-serif text-gold tracking-wide">
+                        LULUSIA ERADICATION REPORT
+                      </h2>
+
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        Following civil unrest and revolutionary activities in the Lulusia Kingdom, a tactical orbital strike was authorized. A weapons platform identified as <RedactedBlock text="Uranus" /> was activated, powered by the stolen <RedactedBlock text="Mother Flame" /> energy source developed by Dr. Vegapunk.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        A localized beam barrage vaporized the island in 6.4 seconds, leaving a permanent ocean void and causing global sea levels to <RedactedBlock text="rise by 1 meter" /> instantly.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        All public records of Lulusia's existence have been deleted; navigating to or mapping the coordinates is strictly prohibited. It is as if Lulusia <RedactedBlock text="never existed" />.
+                      </p>
+
+                      <div className="pt-8 border-t border-white/5 flex items-center space-x-3 text-xs text-crimson font-mono font-bold">
+                        <ShieldAlert className="w-4 h-4" />
+                        <span>WARNING: SHADOW INTEL SURROUNDING LULUSIA CORRELATIONS WILL TRIGGER TERMINATION</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedFileId === 'wg-0500' && (
+                    <div className="space-y-6">
+                      <div className="space-y-2 pb-4 border-b border-white/5 font-mono text-[10px] text-fog/40">
+                        <div>RECORD INDEX: WG-0500</div>
+                        <div>OPERATIVE REF: ROBIN.RECORDS</div>
+                        <div>SUBJECT: THE NOAH APOLOGY STONE DECRYPTION</div>
+                      </div>
+
+                      <h2 className="text-2xl font-serif text-gold tracking-wide">
+                        NOAH APOLOGY TRANSLATION
+                      </h2>
+
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        Decryption of the Ryugu Kingdom Poneglyph: Written as a personal apology from <RedactedBlock text="Joy Boy" /> to the Mermaid Princess <RedactedBlock text="Poseidon" />. The text apologizes for breaking a covenant regarding the massive ark <RedactedBlock text="Noah" />.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        The covenant required using the sea kings to lift Noah to the surface when the 'Day of Promise' arrived, allowing fishmen to live beneath the sun. Joy Boy promises that someone will fulfill this covenant in his stead in the distant future.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        The prediction of a 'chosen figure' carrying the will of the dawn is highly correlated with the awakening of <RedactedBlock text="Nika" />.
+                      </p>
+
+                      <div className="pt-8 border-t border-white/5 flex items-center space-x-3 text-xs text-crimson font-mono font-bold">
+                        <ShieldAlert className="w-4 h-4" />
+                        <span>WARNING: DISCLOSURE OF NOAH'S PURPOSE TO SEAFARING FACTIONS IS FORBIDDEN</span>
+                      </div>
+                    </div>
+                  )}
+
                   {selectedFileId === 'wg-0722' && (
                     <div className="space-y-6">
                       <div className="space-y-2 pb-4 border-b border-white/5 font-mono text-[10px] text-fog/40">
@@ -341,6 +419,134 @@ export default function ForbiddenCodex() {
                       <div className="pt-8 border-t border-white/5 flex items-center space-x-3 text-xs text-crimson font-mono font-bold">
                         <ShieldAlert className="w-4 h-4" />
                         <span>WARNING: BROADCAST CENSORSHIP ORDER 09 // EXTERMINATE ALL EGGHEAD WITNESSES</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedFileId === 'wg-0815' && (
+                    <div className="space-y-6">
+                      <div className="space-y-2 pb-4 border-b border-white/5 font-mono text-[10px] text-fog/40">
+                        <div>RECORD INDEX: WG-0815</div>
+                        <div>OPERATIVE REF: CP0.ROB-LUCCI</div>
+                        <div>SUBJECT: EGGHEAD INCIDENT & ANCIENT COLOSSUS</div>
+                      </div>
+
+                      <h2 className="text-2xl font-serif text-gold tracking-wide">
+                        THE EGGHEAD SIEGE & THE IRON GIANT
+                      </h2>
+
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        During the tactical quarantine of Egghead Island, the dormant mechanical colossus built in the{' '}
+                        <RedactedBlock text="Void Century" /> awakened. The machine scaled the island's defense lines, operating on an infinite, ancient energy source that modern science has failed to duplicate.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        Historical tracking confirms this is the same entity that climbed the Red Line and assaulted the Holy Land of{' '}
+                        <RedactedBlock text="Mariejois" /> in the Year 700 before running out of power. The reactivation of the giant is tied directly to the heartbeat frequency of the awakened mythical zone{' '}
+                        <RedactedBlock text="Sun God Nika" />.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        The transmission broadcast from the island was routed through a transponder snail hidden inside the giant's iron shell. Dr. Vegapunk utilized this machine to bypass World Government communications jamming.
+                      </p>
+
+                      <div className="pt-8 border-t border-white/5 flex items-center space-x-3 text-xs text-crimson font-mono font-bold">
+                        <ShieldAlert className="w-4 h-4" />
+                        <span>WARNING: DETAILED INVENTORIES OF ANCIENT WEAPONS ARE RESTRICTED TO GOVERNMENT INQUESTS</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedFileId === 'wg-0900' && (
+                    <div className="space-y-6">
+                      <div className="space-y-2 pb-4 border-b border-white/5 font-mono text-[10px] text-fog/40">
+                        <div>RECORD INDEX: WG-0900</div>
+                        <div>OPERATIVE REF: GOROSEI.SURFACE</div>
+                        <div>SUBJECT: SUPERNATURAL THREAT IDENTIFICATION</div>
+                      </div>
+
+                      <h2 className="text-2xl font-serif text-gold tracking-wide">
+                        THE FIVE ELDERS' DESCENSION & JOY BOY LORE
+                      </h2>
+
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        Following standard Buster Call failure, all <RedactedBlock text="Five Elders (Gorosei)" /> materialized on the surface using glowing demonic summoning pentagrams. They manifested colossal, shadow-regenerative monstrous forms representing ancient folklore horrors.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        The deployment was countered by the pirate entity Luffy, operating in the awakened form of the Sun God <RedactedBlock text="Nika" />. The high resemblance to the ancient warrior of liberation,{' '}
+                        <RedactedBlock text="Joy Boy" />, who signed the Fishman Island apology stone 800 years ago, confirms the resurrection of the core threat to our Sovereignty.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        The transmission from Vegapunk has confirmed the ancient prophecy that a new rising dawn will break the borders of the world. Immediate lockdown of all research assets in the New World is ordered.
+                      </p>
+
+                      <div className="pt-8 border-t border-white/5 flex items-center space-x-3 text-xs text-crimson font-mono font-bold">
+                        <ShieldAlert className="w-4 h-4" />
+                        <span>WARNING: COGNIZANCE OF ELDER TRANSLOCATION LOGS IS PUNISHABLE BY ERASURE</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedFileId === 'wg-0999' && (
+                    <div className="space-y-6">
+                      <div className="space-y-2 pb-4 border-b border-white/5 font-mono text-[10px] text-fog/40">
+                        <div>RECORD INDEX: WG-0999</div>
+                        <div>OPERATIVE REF: CP0.ELITE</div>
+                        <div>SUBJECT: SYSTEMIC HEIRARCHICAL ANOMALY DETECTED</div>
+                      </div>
+
+                      <h2 className="text-2xl font-serif text-gold tracking-wide">
+                        THE EMPTY THRONE & IMU-SAMA
+                      </h2>
+
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        The World Government's public philosophy is built upon the Empty Throne, representing equal division of power among the twenty founding families. However, direct observation confirms the throne is occupied by a singular entity named <RedactedBlock text="Imu" />.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        Imu governs from the Room of Flowers inside Pangaea Castle, possessing absolute control over the Five Elders. The existence of Imu is the highest secret in the world.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        Any non-authorized personnel observing this entity must be immediately vaporized. The sovereign ruler holds a strange fascination with Luffy's <RedactedBlock text="Straw Hat" /> and a giant frozen counterpart in the castle vaults.
+                      </p>
+
+                      <div className="pt-8 border-t border-white/5 flex items-center space-x-3 text-xs text-crimson font-mono font-bold">
+                        <ShieldAlert className="w-4 h-4" />
+                        <span>WARNING: KNOWLEDGE OF IMU EXPOSES THE OBSERVER TO SECURED SYSTEMIC ERASURE</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedFileId === 'wg-1111' && (
+                    <div className="space-y-6">
+                      <div className="space-y-2 pb-4 border-b border-white/5 font-mono text-[10px] text-fog/40">
+                        <div>RECORD INDEX: WG-1111</div>
+                        <div>OPERATIVE REF: FIVE.ELDERS</div>
+                        <div>SUBJECT: LOGISTICAL VECTOR ANALYSIS OF THE STORM</div>
+                      </div>
+
+                      <h2 className="text-2xl font-serif text-gold tracking-wide">
+                        THE CLAN OF D. & INHERITED WILL
+                      </h2>
+
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        Historical tracking of individuals bearing the initial 'D.' confirms they are the direct descendants of the <RedactedBlock text="Great Kingdom's rebels" />. They are designated as the 'Natural Enemies of God' (meaning the World Nobles).
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        The 'D.' represents a shared bloodline or inherited will that has remained dormant for 800 years. Their actions consistently trigger political escalation and threaten the borders of absolute sovereignty.
+                      </p>
+                      
+                      <p className="text-sm leading-relaxed text-parchment-dark font-sans space-y-4 font-light">
+                        They must be eliminated before their paths converge at <RedactedBlock text="Laugh Tale" />, causing the final storm that will upend the balance of the world.
+                      </p>
+
+                      <div className="pt-8 border-t border-white/5 flex items-center space-x-3 text-xs text-crimson font-mono font-bold">
+                        <ShieldAlert className="w-4 h-4" />
+                        <span>WARNING: CLAN DESTRUCTION PROTOCOLS ARE ACTIVE IN ALL NAVY FLEETS</span>
                       </div>
                     </div>
                   )}
@@ -514,6 +720,20 @@ export default function ForbiddenCodex() {
                       align: 'right'
                     },
                     {
+                      time: '800 YEARS AGO',
+                      title: 'Joy Boy\'s Apology & The Noah Covenant',
+                      desc: 'Joy Boy fails to fulfill his promise to Poseidon to bring Fishman Island to the surface, carving his apology onto the Ryugu Poneglyph and leaving the massive ark Noah behind.',
+                      icon: BookOpen,
+                      align: 'left'
+                    },
+                    {
+                      time: '38 YEARS AGO',
+                      title: 'The God Valley Incident',
+                      desc: 'Rocks D. Xebec leads the Rocks Pirates in an assault on God Valley, which is thwarted by a temporary alliance between Monkey D. Garp and Pirate King Gol D. Roger. The island is completely erased from existence afterwards.',
+                      icon: ShieldAlert,
+                      align: 'right'
+                    },
+                    {
                       time: '24 YEARS AGO',
                       title: 'The Conquest of Laugh Tale',
                       desc: 'Gol D. Roger sails his crew through the Grand Line and successfully locates the final hidden island. Finding the true history, he laughs. Following his surrender, his public execution statement starts the great golden era of pirates.',
@@ -521,10 +741,24 @@ export default function ForbiddenCodex() {
                       align: 'left'
                     },
                     {
+                      time: '12 YEARS AGO',
+                      title: 'The Red-Haired Theft',
+                      desc: 'Shanks and the Red Hair Pirates steal the mythical Hito Hito no Mi, Model: Nika (disguised as the Gum-Gum Fruit) from a CP9 escort ship, which is later consumed by Monkey D. Luffy in Foosha Village.',
+                      icon: Lock,
+                      align: 'right'
+                    },
+                    {
                       time: '2 YEARS AGO',
                       title: 'The Battle of Marineford',
-                      desc: 'The greatest military clash in contemporary history between the Whitebeard Pirates and Navy Headquarters. Whitebeards final breath reinforces Rogers claim, confirming the existence of the One Piece to a global audience.',
+                      desc: 'The greatest military clash in contemporary history between the Whitebeard Pirates and Navy Headquarters. Whitebeard\'s final breath reinforces Roger\'s claim, confirming the existence of the One Piece to a global audience.',
                       icon: Terminal,
+                      align: 'left'
+                    },
+                    {
+                      time: '6 DAYS AGO',
+                      title: 'The Lulusia Erasure',
+                      desc: 'A massive beam barrage from Uranus vaporizes the Lulusia Kingdom, leaving a giant ocean void and causing a worldwide rise in sea levels.',
+                      icon: ShieldAlert,
                       align: 'right'
                     },
                     {
@@ -533,6 +767,13 @@ export default function ForbiddenCodex() {
                       desc: 'Dr. Vegapunk releases a worldwide digital broadcast from the burning research island of Egghead, declaring that the world is submerging into the sea. The race for the ancient weapons begins as faction boundaries crystallize.',
                       icon: BookOpen,
                       align: 'left'
+                    },
+                    {
+                      time: 'INCOMING FUTURE',
+                      title: 'The War for the Dawn',
+                      desc: 'The borders of nations collapse as the Straw Hats land on Elbaph. The final conflict for the Empty Throne and the keys to the world\'s survival commences.',
+                      icon: Terminal,
+                      align: 'right'
                     }
                   ].map((event, idx) => {
                     const IconComponent = event.icon;
@@ -555,7 +796,7 @@ export default function ForbiddenCodex() {
                         {/* Content Container */}
                         <div className="w-full md:w-[45%] border border-white/5 hover:border-gold/30 bg-[#0a0d12]/80 backdrop-blur p-6 rounded transition-all duration-500">
                           <span className="text-[10px] font-mono tracking-widest text-gold font-bold block mb-1">
-                            {event.time}
+                             {event.time}
                           </span>
                           <h3 className="text-lg font-serif font-black tracking-wide text-parchment mb-3">
                             {event.title}
