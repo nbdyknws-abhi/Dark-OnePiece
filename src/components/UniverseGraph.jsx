@@ -66,7 +66,8 @@ function GraphNode({ node, activeNode, selectNode, zoomToElement }) {
   const handleNodeClick = (e) => {
     if (e) e.stopPropagation();
     const isTogglingOff = activeNode === node.id;
-    selectNode(isTogglingOff ? null : node.id);
+    const coords = e ? { x: e.clientX, y: e.clientY } : null;
+    selectNode(isTogglingOff ? null : node.id, null, coords);
     if (zoomToElement && !isTogglingOff) {
       zoomToElement(node.id, 2.5, 1500, "easeInOutCubic");
     }
@@ -157,10 +158,10 @@ export default function UniverseGraph() {
   const { activeNode, selectNode, exploreState, isGeopoliticalToggled } = useNarrative();
   const [initialScale] = useState(() => {
     if (typeof window === 'undefined') return 0.45;
-    const scaleX = window.innerWidth / 3000;
-    const scaleY = window.innerHeight / 2250;
-    // Fit the screen, but don't go smaller than 0.05
-    return Math.max(0.05, Math.min(scaleX, scaleY) * 0.95);
+    // Instead of shrinking the massive map to fit a tiny mobile screen (which makes text unreadable),
+    // we set a legible baseline scale and let the user pan around naturally.
+    const isMobile = window.innerWidth < 768;
+    return isMobile ? 0.4 : 0.45;
   });
 
   // If we aren't exploring yet, don't mount the complex SVG or keep it hidden

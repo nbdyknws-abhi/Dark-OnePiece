@@ -9,6 +9,10 @@ export function NarrativeProvider({ children }) {
   const [nodeHistory, setNodeHistory] = useState([]);
   const [weatherEffect, setWeatherEffect] = useState('calm');
 
+  // Free Exploration Timeline State (for DarkProfile)
+  const [activeTimelineWaypointId, setActiveTimelineWaypointId] = useState(null);
+  const [transitionCoords, setTransitionCoords] = useState(null);
+
   // Journey Mode States
   const [activeJourney, setActiveJourney] = useState(null); // 'luffy' | 'robin' | 'law' | null
   const [activeWaypointIndex, setActiveWaypointIndex] = useState(0);
@@ -22,26 +26,30 @@ export function NarrativeProvider({ children }) {
     setExploreState('exploring');
   };
 
-  const selectNode = (nodeId) => {
+  const selectNode = (nodeId, waypointId = null, coords = null) => {
     if (nodeId === null) {
       setActiveNode(null);
       setNodeHistory([]);
       setWeatherEffect('calm');
+      setActiveTimelineWaypointId(null);
+      setTransitionCoords(coords);
       return;
     }
     if (activeNode === nodeId) {
       setActiveNode(null);
       setNodeHistory([]);
       setWeatherEffect('calm');
+      setActiveTimelineWaypointId(null);
+      setTransitionCoords(coords);
       return;
     }
     if (activeNode) {
       setNodeHistory((prev) => [...prev, activeNode]);
     }
     setActiveNode(nodeId);
-    
-    // Assign the custom node ID as the weather effect directly
+    setActiveTimelineWaypointId(waypointId);
     setWeatherEffect(nodeId);
+    setTransitionCoords(coords);
   };
 
   const goBack = () => {
@@ -117,6 +125,14 @@ export function NarrativeProvider({ children }) {
         goBack,
         weatherEffect,
         setWeatherEffect,
+        
+        // Free Exploration Timeline State (for DarkProfile)
+        activeTimelineWaypointId,
+        setActiveTimelineWaypointId,
+        
+        // Transition coordinates
+        transitionCoords,
+        setTransitionCoords,
         
         // Journey state & functions
         activeJourney,
