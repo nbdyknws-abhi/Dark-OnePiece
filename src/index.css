@@ -162,8 +162,9 @@ html.lenis, html.lenis body {
 
 /* Premium Apple-like GPU-Accelerated Ripple Animations */
 .apple-screen-ripple-transition {
-  animation: apple-screen-ripple 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: apple-screen-ripple 1s cubic-bezier(0.4, 0.15, 0.2, 1) forwards;
   will-change: clip-path;
+  clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
 }
 
 .apple-ripple-layer-1 {
@@ -252,6 +253,36 @@ html.lenis, html.lenis body {
   }
   100% {
     transform: translate3d(calc(var(--dx) * 0.5), calc(var(--dy) * 0.5), 0) scale(14);
+    opacity: 0;
+  }
+}
+
+.apple-glass-shockwave {
+  position: absolute;
+  left: var(--ripple-x, 50%);
+  top: var(--ripple-y, 50%);
+  transform: translate3d(-50%, -50%, 0);
+  border-radius: 50%;
+  backdrop-filter: blur(18px) contrast(1.15) brightness(1.1);
+  -webkit-backdrop-filter: blur(18px) contrast(1.15) brightness(1.1);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.15), 
+              0 0 50px rgba(255, 255, 255, 0.2);
+  will-change: width, height, opacity;
+  animation: apple-shockwave-expand 1s cubic-bezier(0.4, 0.15, 0.2, 1) forwards;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes apple-shockwave-expand {
+  0% {
+    width: 0vmax;
+    height: 0vmax;
+    opacity: 1;
+  }
+  100% {
+    width: 300vmax;
+    height: 300vmax;
     opacity: 0;
   }
 }

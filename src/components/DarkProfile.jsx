@@ -300,14 +300,24 @@ export default function DarkProfile() {
           key={screenKey}
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } }}
-          className="absolute inset-0 flex flex-col justify-between apple-screen-ripple-transition"
+          exit={{ opacity: [1, 1], transition: { duration: 1.0 } }}
+          className="absolute inset-0 overflow-hidden"
           style={{
             '--ripple-x': transitionCoords?.x ?? '50%',
-            '--ripple-y': transitionCoords?.y ?? '50%',
-            clipPath: 'circle(0px at var(--ripple-x) var(--ripple-y))'
+            '--ripple-y': transitionCoords?.y ?? '50%'
           }}
         >
+          {/* Glass/Water Shockwave Refraction Ring */}
+          <div 
+            className="apple-glass-shockwave pointer-events-none"
+            style={{
+              left: 'var(--ripple-x)',
+              top: 'var(--ripple-y)'
+            }}
+          />
+
+          {/* Clipped Content Wrapper */}
+          <div className="absolute inset-0 flex flex-col justify-between apple-screen-ripple-transition">
           {/* Gesture Capture Handler Overlay (drag handles timeline swipes) */}
           <motion.div 
             drag
@@ -578,7 +588,8 @@ export default function DarkProfile() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
       </AnimatePresence>
     </motion.div>
   );
