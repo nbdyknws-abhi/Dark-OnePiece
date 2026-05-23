@@ -245,7 +245,7 @@ export default function DarkProfile() {
     if (offset.y < -swipeThreshold) {
       if (activeIndex < timeline.length - 1) {
         const nextWp = timeline[activeIndex + 1];
-        setTransitionCoords({ x: window.innerWidth / 2, y: window.innerHeight });
+        setTransitionCoords({ x: '50%', y: '100%' });
         setActiveTimelineWaypointId(nextWp.id);
         if (nextWp.weather) setWeatherEffect(nextWp.weather);
       }
@@ -254,28 +254,28 @@ export default function DarkProfile() {
     else if (offset.y > swipeThreshold) {
       if (activeIndex > 0) {
         const prevWp = timeline[activeIndex - 1];
-        setTransitionCoords({ x: window.innerWidth / 2, y: 0 });
+        setTransitionCoords({ x: '50%', y: '0%' });
         setActiveTimelineWaypointId(prevWp.id);
         if (prevWp.weather) setWeatherEffect(prevWp.weather);
       } else if (activeIndex === 0) {
-        setTransitionCoords({ x: window.innerWidth / 2, y: 0 });
+        setTransitionCoords({ x: '50%', y: '0%' });
         setActiveTimelineWaypointId(null);
         setWeatherEffect(node.id);
       } else {
-        setTransitionCoords({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+        setTransitionCoords({ x: '50%', y: '50%' });
         selectNode(null);
       }
     } 
     // Swipe LEFT (transition connection)
     else if (offset.x < -swipeThreshold && leftConnection) {
       const wpId = currentWaypoint ? currentWaypoint.id : null;
-      const coords = { x: window.innerWidth, y: window.innerHeight / 2 };
+      const coords = { x: '100%', y: '50%' };
       selectNode(leftConnection.id, wpId, coords);
     } 
     // Swipe RIGHT (transition connection)
     else if (offset.x > swipeThreshold && rightConnection) {
       const wpId = currentWaypoint ? currentWaypoint.id : null;
-      const coords = { x: 0, y: window.innerHeight / 2 };
+      const coords = { x: '0%', y: '50%' };
       selectNode(rightConnection.id, wpId, coords);
     }
   };
@@ -300,11 +300,11 @@ export default function DarkProfile() {
           key={screenKey}
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } }}
+          exit={{ opacity: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } }}
           className="absolute inset-0 flex flex-col justify-between apple-screen-ripple-transition"
           style={{
-            '--ripple-x': `${transitionCoords?.x ?? window.innerWidth / 2}px`,
-            '--ripple-y': `${transitionCoords?.y ?? window.innerHeight / 2}px`,
+            '--ripple-x': transitionCoords?.x ?? '50%',
+            '--ripple-y': transitionCoords?.y ?? '50%',
             clipPath: 'circle(0px at var(--ripple-x) var(--ripple-y))'
           }}
         >
@@ -323,6 +323,7 @@ export default function DarkProfile() {
               src={backgroundImage} 
               alt={node.name}
               className="w-full h-full object-cover object-center opacity-65"
+              decoding="async"
             />
             {/* Dark cinematic overlays */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#040506]/90 via-transparent to-[#040506]/95" />
@@ -347,7 +348,7 @@ export default function DarkProfile() {
             <button 
               onClick={(e) => { 
                 e.stopPropagation(); 
-                setTransitionCoords({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                setTransitionCoords({ x: '50%', y: '50%' });
                 selectNode(null); 
               }}
               className="pointer-events-auto flex items-center space-x-2 text-parchment/60 hover:text-gold border border-gold/15 hover:border-gold/50 bg-[#090b0e]/40 backdrop-blur px-3 py-1.5 rounded transition-all duration-300 group"
@@ -473,7 +474,7 @@ export default function DarkProfile() {
                 <div 
                   className="flex items-center justify-end group cursor-pointer" 
                   onClick={() => {
-                    setTransitionCoords({ x: window.innerWidth - 40, y: window.innerHeight / 2 });
+                    setTransitionCoords({ x: '100%', y: '50%' });
                     setActiveTimelineWaypointId(null);
                     setWeatherEffect(node.id);
                   }}
@@ -501,7 +502,7 @@ export default function DarkProfile() {
                       key={wp.id} 
                       className="flex items-center justify-end group cursor-pointer" 
                       onClick={() => {
-                        setTransitionCoords({ x: window.innerWidth - 40, y: window.innerHeight / 2 });
+                        setTransitionCoords({ x: '100%', y: '50%' });
                         setActiveTimelineWaypointId(wp.id);
                         if (wp.weather) setWeatherEffect(wp.weather);
                       }}
@@ -537,7 +538,7 @@ export default function DarkProfile() {
                   <button 
                     onClick={() => {
                       const wpId = currentWaypoint ? currentWaypoint.id : null;
-                      const coords = { x: 0, y: window.innerHeight / 2 };
+                      const coords = { x: '0%', y: '50%' };
                       selectNode(leftConnection.id, wpId, coords);
                     }}
                     className="pointer-events-auto flex items-center text-left hover:text-gold transition-colors text-glow-gold"
@@ -564,7 +565,7 @@ export default function DarkProfile() {
                   <button 
                     onClick={() => {
                       const wpId = currentWaypoint ? currentWaypoint.id : null;
-                      const coords = { x: window.innerWidth, y: window.innerHeight / 2 };
+                      const coords = { x: '100%', y: '50%' };
                       selectNode(rightConnection.id, wpId, coords);
                     }}
                     className="pointer-events-auto flex items-center text-right hover:text-gold transition-colors text-glow-gold"

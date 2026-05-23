@@ -162,7 +162,7 @@ html.lenis, html.lenis body {
 
 /* Premium Apple-like GPU-Accelerated Ripple Animations */
 .apple-screen-ripple-transition {
-  animation: apple-screen-ripple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: apple-screen-ripple 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: clip-path;
 }
 
@@ -210,7 +210,7 @@ html.lenis, html.lenis body {
     clip-path: circle(0px at var(--ripple-x) var(--ripple-y));
   }
   100% {
-    clip-path: circle(150% at var(--ripple-x) var(--ripple-y));
+    clip-path: circle(150vmax at var(--ripple-x) var(--ripple-y));
   }
 }
 

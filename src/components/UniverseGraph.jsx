@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NODES, EDGES } from '../data/loreData';
@@ -66,7 +66,7 @@ function GraphNode({ node, activeNode, selectNode, zoomToElement }) {
   const handleNodeClick = (e) => {
     if (e) e.stopPropagation();
     const isTogglingOff = activeNode === node.id;
-    const coords = e ? { x: e.clientX, y: e.clientY } : null;
+    const coords = e ? { x: `${e.clientX}px`, y: `${e.clientY}px` } : null;
     selectNode(isTogglingOff ? null : node.id, null, coords);
     if (zoomToElement && !isTogglingOff) {
       zoomToElement(node.id, 2.5, 1500, "easeInOutCubic");
@@ -156,6 +156,22 @@ function GraphNode({ node, activeNode, selectNode, zoomToElement }) {
 
 export default function UniverseGraph() {
   const { activeNode, selectNode, exploreState, isGeopoliticalToggled } = useNarrative();
+  const [isFullyHidden, setIsFullyHidden] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (activeNode) {
+      timer = setTimeout(() => {
+        setIsFullyHidden(true);
+      }, 1100);
+    } else {
+      timer = setTimeout(() => {
+        setIsFullyHidden(false);
+      }, 0);
+    }
+    return () => clearTimeout(timer);
+  }, [activeNode]);
+
   const [initialScale] = useState(() => {
     if (typeof window === 'undefined') return 0.45;
     // Instead of shrinking the massive map to fit a tiny mobile screen (which makes text unreadable),
@@ -168,7 +184,12 @@ export default function UniverseGraph() {
   if (exploreState !== 'exploring') return null;
 
   return (
-    <div className="absolute inset-0 z-10 bg-transparent flex items-center justify-center overflow-hidden">
+    <div 
+      className={`absolute inset-0 z-10 bg-transparent flex items-center justify-center overflow-hidden transition-opacity duration-500 ${
+        activeNode ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
+      style={isFullyHidden ? { display: 'none' } : undefined}
+    >
       
       {/* Background cinematic grid */}
       <div className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-10 bg-[radial-gradient(rgba(212,175,55,0.2)_1px,transparent_1px)] [background-size:40px_40px]"></div>
