@@ -292,7 +292,7 @@ export default function DarkProfile() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="fixed inset-0 z-50 bg-[#040506] touch-none overflow-hidden select-none"
     >
       <AnimatePresence mode="popLayout">
@@ -300,7 +300,7 @@ export default function DarkProfile() {
           key={screenKey}
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 2.2, ease: [0.15, 0.85, 0.2, 1] } }}
+          exit={{ opacity: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } }}
           className="absolute inset-0 flex flex-col justify-between apple-screen-ripple-transition"
           style={{
             '--ripple-x': `${transitionCoords?.x ?? window.innerWidth / 2}px`,
